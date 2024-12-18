@@ -2,7 +2,7 @@ package org.example.DB;
 
 import java.sql.Connection;
 
-public class ConnectDB {
+public class DbConnect {
     private String db;
     private String port;
     private String user;
@@ -10,11 +10,11 @@ public class ConnectDB {
     private String jdbc;
     private Connection connection;
 
-    public ConnectDB() {
+    public DbConnect() {
         this.db = "MANEMPSA";
         this.port = "3306";
         this.user = "root";
-        this.password = "";
+        this.password = "root";
         this.jdbc = "jdbc:mysql://localhost:" + port + "/"+db;
         this.connection = null;
     }

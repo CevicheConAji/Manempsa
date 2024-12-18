@@ -1,21 +1,36 @@
 package org.example.controlles;
 
-import org.example.DB.ConnectDB;
+import org.example.DB.DbConnect;
 
 import java.sql.*;
 
-public class ControllerDB {
-    private final ConnectDB connectDB =  new ConnectDB();
-    private Connection connection = connectDB.getConnection();
+public class DbController {
+    private final DbConnect dbConnect =  new DbConnect();
+    private Connection connection = dbConnect.getConnection();
 
-    public void connect() {
+    public Connection connect() {
         try{
-            connection = DriverManager.getConnection(connectDB.getJdbc(),connectDB.getUser(),connectDB.getPassword());
+            connection = DriverManager.getConnection(dbConnect.getJdbc(), dbConnect.getUser(), dbConnect.getPassword());
             System.out.println("Connected to the database successfully");
         }catch (SQLException e){
             System.out.println("Error connecting to the database "+e.getMessage());
         }
+        return connection;
     }
+
+    public Connection getConnection() {
+        try{
+            connection = DriverManager.getConnection(dbConnect.getJdbc(), dbConnect.getUser(), dbConnect.getPassword());
+        }catch (SQLException e){
+            System.out.println("Error connecting to the database "+e.getMessage());
+        }
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     public void disconnect() {
         try{
             connection.close();
@@ -25,9 +40,9 @@ public class ControllerDB {
         }
     }
     public void createUpdate(String sql){
-        int rowsAffected = 0;
+        int n = 0;
         try{
-            rowsAffected = connection.createStatement().executeUpdate(sql);
+            n = connection.createStatement().executeUpdate(sql);
             System.out.println(sql);
         }catch (SQLException e){
             System.out.println("Error creating the database "+e.getMessage());
@@ -46,4 +61,5 @@ public class ControllerDB {
         }
         return resultSet;
     }
+
 }
