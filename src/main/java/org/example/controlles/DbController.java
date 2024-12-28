@@ -39,16 +39,7 @@ public class DbController {
             System.out.println("Error disconnecting from the database "+e.getMessage());
         }
     }
-    public void createUpdate(String sql){
-        int n = 0;
-        try{
-            n = connection.createStatement().executeUpdate(sql);
-            System.out.println(sql);
-        }catch (SQLException e){
-            System.out.println("Error creating the database "+e.getMessage());
-        }
 
-    }
     public ResultSet createQuery(String sql){
         Statement statement;
         ResultSet resultSet = null;
