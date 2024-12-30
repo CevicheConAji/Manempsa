@@ -107,7 +107,7 @@ public class TablesControllers {
         return n;
 
     }
-    public int addDataBase(String sql){
+    public int addInfoDataBase(String sql){
 
         int n = 0;
         try{

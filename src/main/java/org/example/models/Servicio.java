@@ -1,22 +1,30 @@
 package org.example.models;
 
-import java.sql.Date;
-
 public class Servicio {
     private int numero;
-    private Date fecha;
+    private String fecha;
+    private String tipo;
     private double cantidad;
     private String text;
     private String dni;
     private String cif;
 
-    public Servicio(int numero, Date fecha, double cantidad, String text, String dni, String cif) {
+    public Servicio(int numero, String fecha, String tipo,double cantidad, String text, String dni, String cif) {
         this.numero = numero;
         this.fecha = fecha;
+        this.tipo = tipo;
         this.cantidad = cantidad;
         this.text = text;
         this.dni = dni;
         this.cif = cif;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Servicio() {
@@ -30,11 +38,11 @@ public class Servicio {
         this.numero = numero;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

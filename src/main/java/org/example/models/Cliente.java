@@ -57,4 +57,15 @@ public class Cliente {
     public void setTelefono02(String telefono02) {
         this.telefono02 = telefono02;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() +
+                " cif='" + cif + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono01='" + telefono01 + '\'' +
+                ", telefono02='" + telefono02 + '\'' +
+                "}\n";
+    }
 }
