@@ -3,11 +3,11 @@ package org.example.controlles;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class TablesControllers {
+public class TablesCreateControllers {
     private DbController dbController = new DbController();
     private Connection connection = dbController.getConnection();
 
-    public TablesControllers(DbController dbController) {
+    public TablesCreateControllers(DbController dbController) {
         this.dbController = dbController;
     }
 
@@ -107,17 +107,6 @@ public class TablesControllers {
         return n;
 
     }
-    public int addInfoDataBase(String sql){
 
-        int n = 0;
-        try{
-            n =  connection.createStatement().executeUpdate(sql);
-            System.out.println("Executed " + sql + " statements");
-        }catch (SQLException ex){
-            System.out.println("Error creating tables coche " + ex.getMessage());
-        }
-
-        return n;
-    }
 
 }

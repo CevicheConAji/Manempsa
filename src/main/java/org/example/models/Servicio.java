@@ -77,4 +77,17 @@ public class Servicio {
     public void setCif(String cif) {
         this.cif = cif;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() +
+                " numero=" + numero +
+                ", fecha='" + fecha + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", cantidad=" + cantidad +
+                ", text='" + text + '\'' +
+                ", dni='" + dni + '\'' +
+                ", cif='" + cif + '\'' +
+                '}';
+    }
 }

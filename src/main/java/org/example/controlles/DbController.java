@@ -1,6 +1,6 @@
 package org.example.controlles;
 
-import org.example.DB.DbConnect;
+import org.example.config.DbConnect;
 
 import java.sql.*;
 
@@ -51,6 +51,18 @@ public class DbController {
             System.out.println("Error creating the database "+e.getMessage());
         }
         return resultSet;
+    }
+    public int addInfoDataBase(String sql){
+
+        int n = 0;
+        try{
+            n =  connection.createStatement().executeUpdate(sql);
+            System.out.println("Executed " + sql + " statements");
+        }catch (SQLException ex){
+            System.out.println("Error creating tables " + ex.getMessage()+"\n"+sql);
+        }
+
+        return n;
     }
 
 }
