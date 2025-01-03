@@ -9,11 +9,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
+
+/**
+ * Clase que realiza pruebas de integración para insertar, consultar y modificar datos
+ * en una base de datos, utilizando diferentes controladores y modelos.
+ */
 public class Testing {
 
+    /**
+     * Metodo principal que ejecuta la prueba completa, desde la conexión a la base de datos
+     * hasta la creación de tablas, inserción de datos y ejecución de consultas.
+     */
     public void executeTesting(){
 
         DbController dbController = new DbController();
@@ -27,16 +35,30 @@ public class Testing {
 
         querys(dbController);
 
-        insertarRegistrosCoches(dbController);
+        insertarRegistros(dbController);
+
+        updateCoches(dbController);
 
         disconnect(dbController);
     }
+
+    /**
+     * Inserta registros de ejemplo en todas las tablas de la base de datos.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     private void insertarRegistros(DbController dbController) {
         insertarRegistroTrabajador(dbController);
         insertarRegistrosCliente(dbController);
         insertarRegistrosServicio(dbController);
         insertarRegistrosCoches(dbController);
     }
+
+    /**
+     * Inserta registros desde archivos CSV en la base de datos.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     private void insertsCsvToDatabase(DbController dbController){
         ArrayList<Coche> coches = csvCoche();
         ArrayList<Trabajador> trabajadores = csvTrabajadores() ;
@@ -54,6 +76,12 @@ public class Testing {
         controllerCoche.insertTableBaseCoche(coches);
 
     }
+
+    /**
+     * Realiza consultas de ejemplo a la base de datos y muestra los resultados en consola.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     public void querys(DbController dbController){
         Scanner sc = new Scanner(System.in);
         CocheController controllerCoche = new CocheController(new DbController());
@@ -72,13 +100,30 @@ public class Testing {
 
         controllerServicio.showQuery(dbController.createQuery("SELECT * FROM Servicios WHERE CIF ='" +  cif + "'"));
     }
+
+    /**
+     * Establece la conexión con la base de datos.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     private  void connection(DbController dbController){
         dbController.connect();
     }
 
+    /**
+     * Cierra la conexión con la base de datos.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     private void disconnect(DbController dbController){
         dbController.disconnect();
     }
+
+    /**
+     * Crea todas las tablas necesarias en la base de datos.
+     *
+     * @param tableControllers Controlador para la creación de tablas.
+     */
     private void createTables(TablesCreateControllers tableControllers){
         tableControllers.createTablesClientes();
         tableControllers.createTableTrabajadores();
@@ -86,6 +131,12 @@ public class Testing {
         tableControllers.createTableCoches();
         tableControllers.createTableServicios();
     }
+
+    /**
+     * Lee datos de coches desde un archivo CSV y los convierte en una lista de objetos {@link Coche}.
+     *
+     * @return Lista de coches.
+     */
     private ArrayList<Coche> csvCoche(){
         ArrayList<Coche> coches = new ArrayList<>();
 
@@ -108,6 +159,11 @@ public class Testing {
         return coches;
     }
 
+    /**
+     * Lee datos de trabajadores desde un archivo CSV y los convierte en una lista de objetos {@link Trabajador}.
+     *
+     * @return Lista de trabajadores.
+     */
     private ArrayList<Trabajador> csvTrabajadores(){
         ArrayList<Trabajador> trabajadores = new ArrayList<>();
 
@@ -130,6 +186,11 @@ public class Testing {
         return trabajadores;
     }
 
+    /**
+     * Lee datos de clientes desde un archivo CSV y los convierte en una lista de objetos {@link Cliente}.
+     *
+     * @return Lista de clientes.
+     */
     private ArrayList<Cliente> csvCliente(){
         ArrayList<Cliente> clientes = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader("src/main/java/org/example/CSV/clientes.csv"))) {
@@ -150,6 +211,12 @@ public class Testing {
         return clientes;
     }
 
+
+    /**
+     * Lee datos de servicios desde un archivo CSV y los convierte en una lista de objetos {@link Servicio}.
+     *
+     * @return Lista de servicios.
+     */
     private ArrayList<Servicio> csvServicio(){
         ArrayList<Servicio> servicios = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader("src/main/java/org/example/CSV/servicios.csv"))) {
@@ -175,6 +242,11 @@ public class Testing {
         return servicios;
     }
 
+    /**
+     * Inserta registros de ejemplo en la tabla `Clientes`.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     private void insertarRegistrosCliente(DbController dbController){
         System.out.println("Insertando registros clientes");
         ClienteController clienteController = new ClienteController(dbController);
@@ -200,6 +272,12 @@ public class Testing {
         System.out.println("Registros clientes\n"+clienteEjemplo01);
         System.out.println("Registros clientes\n"+clienteEjemplo02);
     }
+
+    /**
+     * Inserta registros de ejemplo en la tabla `Trabajadores`.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     public void insertarRegistroTrabajador(DbController dbController){
         System.out.println("Insertando registros trabajadores");
         Trabajador trabajadorEjemplo01 = new Trabajador();
@@ -230,6 +308,12 @@ public class Testing {
 
 
     }
+
+    /**
+     * Inserta registros de ejemplo en la tabla `Servicios`.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     public void insertarRegistrosServicio(DbController dbController){
         System.out.println("Insertando registros servicios");
 
@@ -259,6 +343,12 @@ public class Testing {
         System.out.println("Registro Servicios\n"+servicioEjemplo02);
 
     }
+
+    /**
+     * Inserta registros de ejemplo en la tabla `Coches`.
+     *
+     * @param dbController Controlador de base de datos.
+     */
     public void insertarRegistrosCoches(DbController dbController){
         System.out.println("Insertando registros coches");
 
@@ -286,6 +376,20 @@ public class Testing {
         System.out.println("Registro Coches\n"+cocheEjemplo01);
         System.out.println("Registro Coches\n"+cocheEjemplo02);
 
+    }
+
+    /**
+     * Actualiza el modelo de un coche en la base de datos según su matrícula.
+     *
+     * @param dbController Controlador de base de datos.
+     */
+    private void updateCoches(DbController dbController){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese la matricula del coche");
+        String matricula = sc.nextLine();
+        System.out.println("Ingrese la modelo del coche");
+        String modelo = sc.nextLine();
+        dbController.addInfoDataBase("UPDATE Coches SET Modelo = '" + modelo + "' WHERE Matricula = '" + matricula + "'");
     }
 
 }

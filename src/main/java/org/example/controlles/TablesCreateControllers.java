@@ -3,14 +3,36 @@ package org.example.controlles;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Clase que controla la creación de tablas en la base de datos.
+ * Proporciona métodos para crear tablas específicas y realizar alteraciones.
+ */
 public class TablesCreateControllers {
+
+    /**
+     * Controlador de base de datos utilizado para manejar la conexión.
+     */
     private DbController dbController = new DbController();
+
+    /**
+     * Conexión activa a la base de datos.
+     */
     private Connection connection = dbController.getConnection();
 
+    /**
+     * Constructor de la clase TablesCreateControllers.
+     *
+     * @param dbController Controlador de base de datos proporcionado para interactuar con la base de datos.
+     */
     public TablesCreateControllers(DbController dbController) {
         this.dbController = dbController;
     }
 
+    /**
+     * Crea la tabla `Clientes` en la base de datos si no existe.
+     *
+     * @return Número de filas afectadas por la operación.
+     */
     public int createTablesClientes() {
         String sql = "CREATE TABLE if not exists clientes\n" +
                 "(CIF varchar(15) primary key,\n" +
@@ -31,6 +53,11 @@ public class TablesCreateControllers {
         return n;
     }
 
+    /**
+     * Crea la tabla `Trabajadores` en la base de datos si no existe.
+     *
+     * @return Número de filas afectadas por la operación.
+     */
     public int createTableTrabajadores(){
 
         String sql = "CREATE TABLE IF NOT EXISTS Trabajadores (\n" +
@@ -50,6 +77,12 @@ public class TablesCreateControllers {
         }
         return n;
     }
+
+    /**
+     * Crea la tabla `Coches` en la base de datos si no existe.
+     *
+     * @return Número de filas afectadas por la operación.
+     */
     public int createTableCoches(){
         String sql = "CREATE TABLE IF NOT EXISTS Coches (\n" +
                 "    Matricula VARCHAR(10) PRIMARY KEY,\n" +
@@ -70,6 +103,12 @@ public class TablesCreateControllers {
 
         return n;
     }
+
+    /**
+     * Agrega una clave foránea entre las tablas `Coches` y `Trabajadores`.
+     *
+     * @return Número de filas afectadas por la operación.
+     */
     public int alterTableTrabajadores(){
         String sql = "ALTER TABLE Coches\n" +
                 "ADD CONSTRAINT fk_coches_trabajadores\n" +
@@ -84,6 +123,12 @@ public class TablesCreateControllers {
         }
         return n;
     }
+
+    /**
+     * Crea la tabla `Servicios` en la base de datos si no existe.
+     *
+     * @return Número de filas afectadas por la operación.
+     */
     public int createTableServicios(){
         String sql = "CREATE TABLE IF NOT EXISTS Servicios (\n" +
                 "    Numero INT AUTO_INCREMENT PRIMARY KEY,\n" +
